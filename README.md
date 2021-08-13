@@ -17,7 +17,7 @@ CREATE TABLE "Album" (
 "Title" TEXT,
 "IsExplicit" BOOLEAN,
 "ReleaseDate" DATE,
-"BandId" INTEGER NULL REFERENCES "Album" ("Id")
+"BandId" INTEGER NULL REFERENCES "Band" ("Id")
 );
 
 CREATE TABLE "Songs" (
