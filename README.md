@@ -30,3 +30,5 @@ CREATE TABLE "Songs" (
 
 INSERT INTO "Band" ("Name", "CountryOfOrigin","NumberOfMembers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
 VALUES ('Bone Thugs And Harmony', 'USA', '5', 'BoneThugs.com', 'HipHop', true, 'Austin Pierce', '813-431-7570');
+
+SELECT \* FROM "Band";
