@@ -48,6 +48,11 @@ SET "IsSigned" = true
 WHERE "IsSigned" = false;
 
 SELECT \*
+FROM "Album"
+JOIN "Band" ON "Album"."BandId" = "Band"."Id"
+WHERE "Band"."Name" = 'Bone Thugs And Harmony'
+
+SELECT \*
 FROM "Band"
 WHERE "Band"."IsSigned" = true;
 
