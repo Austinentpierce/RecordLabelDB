@@ -24,5 +24,6 @@ CREATE TABLE "Songs" (
 "Id" SERIAL PRIMARY KEY,
 "TrackNumber" INTEGER,
 "Title" TEXT,
-"Duration" TIME
+"Duration" TIME,
+"AlbumId" INTEGER NULL REFERENCES "Album" ("Id")
 );
