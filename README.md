@@ -32,3 +32,9 @@ INSERT INTO "Band" ("Name", "CountryOfOrigin","NumberOfMembers", "Website", "Sty
 VALUES ('Bone Thugs And Harmony', 'USA', '5', 'BoneThugs.com', 'HipHop', true, 'Austin Pierce', '813-431-7570');
 
 SELECT \* FROM "Band";
+
+INSERT INTO "Album" ("Title", "IsExplicit", "ReleaseDate")
+VALUES ('E. 1999 Eternal', true, '07/25/95');
+
+INSERT INTO "Songs" ("TrackNumber", "Title", "Duration", "AlbumId")
+VALUES ('1', 'East 1999', '00:04:22', '1' );
