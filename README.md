@@ -38,3 +38,19 @@ VALUES ('E. 1999 Eternal', true, '07/25/95');
 
 INSERT INTO "Songs" ("TrackNumber", "Title", "Duration", "AlbumId")
 VALUES ('1', 'East 1999', '00:04:22', '1' );
+
+UPDATE "Band"
+SET "IsSigned" = false
+WHERE "IsSigned" = true;
+
+UPDATE "Band"
+SET "IsSigned" = true
+WHERE "IsSigned" = false;
+
+SELECT \*
+FROM "Band"
+WHERE "Band"."IsSigned" = true;
+
+SELECT \*
+FROM "Band"
+WHERE "Band"."IsSigned" = false;
