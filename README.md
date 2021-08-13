@@ -9,7 +9,7 @@ CREATE TABLE "Band" (
 "Style" TEXT,
 "IsSigned" TEXT,
 "ContactName" TEXT,
-"ContactPhoneNumber" INTEGER
+"ContactPhoneNumber" TYPE VARCHAR(12)
 );
 
 CREATE TABLE "Album" (
@@ -27,3 +27,6 @@ CREATE TABLE "Songs" (
 "Duration" TIME,
 "AlbumId" INTEGER NULL REFERENCES "Album" ("Id")
 );
+
+INSERT INTO "Band" ("Name", "CountryOfOrigin","NumberOfMembers", "Website", "Style", "IsSigned", "ContactName", "ContactPhoneNumber")
+VALUES ('Bone Thugs And Harmony', 'USA', '5', 'BoneThugs.com', 'HipHop', true, 'Austin Pierce', '813-431-7570');
