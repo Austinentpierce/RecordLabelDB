@@ -53,6 +53,11 @@ JOIN "Band" ON "Album"."BandId" = "Band"."Id"
 WHERE "Band"."Name" = 'Bone Thugs And Harmony'
 
 SELECT \*
+FROM "Album"
+JOIN "Songs" ON "AlbumId"="Album"."Id"
+ORDER BY "ReleaseDate";
+
+SELECT \*
 FROM "Band"
 WHERE "Band"."IsSigned" = true;
 
