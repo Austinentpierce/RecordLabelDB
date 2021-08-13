@@ -16,7 +16,8 @@ CREATE TABLE "Album" (
 "Id" SERIAL PRIMARY KEY,
 "Title" TEXT,
 "IsExplicit" BOOLEAN,
-"ReleaseDate" DATE
+"ReleaseDate" DATE,
+"BandId" INTEGER NULL REFERENCES "Album" ("Id")
 );
 
 CREATE TABLE "Songs" (
