@@ -33,7 +33,7 @@ VALUES ('Bone Thugs And Harmony', 'USA', '5', 'BoneThugs.com', 'HipHop', true, '
 
 SELECT \* FROM "Band";
 
-INSERT INTO "Album" ("Title", "IsExplicit", "ReleaseDate")
+INSERT INTO "Album" ("Title", "IsExplicit", "ReleaseDate", "BandId")
 VALUES ('E. 1999 Eternal', true, '07/25/95');
 
 INSERT INTO "Songs" ("TrackNumber", "Title", "Duration", "AlbumId")
