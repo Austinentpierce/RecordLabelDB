@@ -6,7 +6,7 @@ namespace RecordLabelDB
 {
     class Program
     {
-        public static void Menu()
+        public static void Directory()
         {
             Console.WriteLine();
             Console.WriteLine("Would you like to:");
@@ -81,7 +81,14 @@ namespace RecordLabelDB
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to C#");
+            var context = new RecordLabelDBContext();
+
+            var keepGoing = true;
+            while (keepGoing)
+            {
+                Directory();
+                var choice = Console.ReadLine();
+            }
         }
 
     }
