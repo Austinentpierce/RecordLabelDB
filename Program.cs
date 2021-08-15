@@ -54,12 +54,34 @@ namespace RecordLabelDB
             }
 
         }
+        static bool PromptForBoolean(string prompt)
+        {
+            Console.Write(prompt);
+            bool userInput;
+            var IsThisGoodInput = bool.TryParse(Console.ReadLine(), out userInput);
+            if (IsThisGoodInput)
+            {
+                return userInput;
+            }
+            else
+            {
+                Console.WriteLine("Sorry there is no options under this input, Im going to choose false as your choice");
+                return false;
+            }
 
+        }
+        static string PromptForString(string prompt)
+        {
+            Console.Write(prompt)
+          var userInput = Console.ReadLine();
+
+            return userInput;
+
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to C#");
+        }
 
     }
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Welcome to C#");
-    }
-
-}
