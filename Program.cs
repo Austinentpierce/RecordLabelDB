@@ -22,6 +22,39 @@ namespace RecordLabelDB
             Console.WriteLine("[10]View all bands that are unsigned");
             Console.WriteLine("[11]Quit the program");
         }
+        static DateTime PromptForDateTime(string prompt)
+        {
+            Console.Write(prompt);
+            DateTime userInput;
+            var IsThisGoodInput = DateTime.TryParse(Console.ReadLine(), out userInput);
+            if (IsThisGoodInput)
+            {
+                return userInput;
+            }
+            else
+            {
+                Console.WriteLine("Sorry there is no options under this input, ill use a default date for your selection");
+                return default(DateTime);
+            }
+
+        }
+        static int PromptForInteger(string prompt)
+        {
+            Console.Write(prompt);
+            int userInput;
+            var IsThisGoodInput = int.TryParse(Console.ReadLine(), out userInput);
+            if (IsThisGoodInput)
+            {
+                return userInput;
+            }
+            else
+            {
+                Console.WriteLine("Sorry there is no options under this input, ill use 0 as your number. ");
+                return 0;
+            }
+
+        }
+
 
     }
     static void Main(string[] args)
