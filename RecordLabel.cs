@@ -13,6 +13,9 @@ namespace RecordLabelDB
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("server=localhost;database=RecordLabelDB");
+
+            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     }
 }
