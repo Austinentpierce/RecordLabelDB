@@ -88,6 +88,30 @@ namespace RecordLabelDB
             {
                 Directory();
                 var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Adding a new band");
+                            Console.WriteLine();
+
+                            var newBand = new Band();
+
+                            newBand.Name = PromptForString(" What is the name of the new band you'd like to add? ");
+                            newBand.CountryOfOrigin = PromptForString(" What country did the band originate in? ");
+                            newBand.NumberOfMembers = PromptForInteger(" How many members are in the new band being created? ");
+                            newBand.Website = PromptForString(" What is the website that the band uses for their music? ");
+                            newBand.Style = PromptForString(" What style/genre does the band focus their music on? ");
+                            newBand.IsSigned = PromptForBoolean("Is this band signed? True/False ");
+                            newBand.ContactName = PromptForString("What is the contact name/managers name of the band? ");
+                            newBand.ContactPhoneNumber = PromptForString("What is the contact phone number of that manager? ");
+
+                            context.Band.Add(newBand);
+                            context.SaveChanges();
+                            break;
+                        }
+                }
             }
         }
 
