@@ -72,8 +72,8 @@ namespace RecordLabelDB
         }
         static string PromptForString(string prompt)
         {
-            Console.Write(prompt)
-          var userInput = Console.ReadLine();
+            Console.Write(prompt);
+            var userInput = Console.ReadLine();
 
             return userInput;
 
@@ -108,8 +108,20 @@ namespace RecordLabelDB
                             newBand.ContactPhoneNumber = PromptForString("What is the contact phone number of that manager? ");
 
                             context.Band.Add(newBand);
-                            context.SaveChanges();
+                            context.SaveChanges(); ccc
                             break;
+                        }
+                    case "2":
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Viewing all of the bands in the directory");
+                            Console.WriteLine();
+
+                            var bandName = context.Band.Include(Band => Band.Album);
+                            foreach (var band in bandName)
+                            {
+                                Console.WriteLine($"There is a band call {band.Name}");
+                            }
                         }
                 }
             }
