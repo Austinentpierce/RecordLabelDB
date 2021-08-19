@@ -263,6 +263,20 @@ namespace RecordLabelDB
                         {
                             Console.WriteLine($"\n{searchBands} is not in our records. \n Please try again.");
                         }
+
+                        else
+                        {
+                            existingBand.IsSigned = false;
+                            context.SaveChanges();
+
+                            Console.WriteLine($"\n {searchBands} has been move to the 'Un-Signed' department.");
+                        }
+                    }
+                    if (directoryOption == "6")
+                    {
+                        var searchBands = PromptForString("Which band would you like to bring back to the label?");
+
+                        var existingBand = context.Band.FirstOrDefault(Bands => Bands.Name == searchBands);
                     }
                 }
             }
