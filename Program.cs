@@ -253,6 +253,17 @@ namespace RecordLabelDB
                             }
                         }
                     }
+                    if (directoryOption == "5")
+                    {
+                        var searchBands = PromptForString("What is the bands name you would like to let go?");
+
+                        var existingBand = context.Band.FirstOrDefault(Bands => Bands.Name == searchBands);
+
+                        if (existingBand == null)
+                        {
+                            Console.WriteLine($"\n{searchBands} is not in our records. \n Please try again.");
+                        }
+                    }
                 }
             }
 
