@@ -183,6 +183,74 @@ namespace RecordLabelDB
                         else
                         {
                             Console.WriteLine($"Band: {searchBands}");
+
+                            Console.WriteLine($"Album: {searchAlbums}");
+                            var albumTitle = searchAlbums;
+
+                            Console.WriteLine("Is the album explicit? [Yes/No]: ");
+                            var isExplicit = getBoolInputValue(Console.ReadLine());
+
+                            Console.WriteLine("Album Release Date: ");
+                            var releaseDate = Console.ReadLine();
+
+                            var newAlbum = new Album
+                            {
+                                Title = albumTitle,
+                                IsExplicit = isExplicit
+                            };
+
+                            context.SaveChanges();
+                            Console.WriteLine($"Your selection of {albumTitle} has been recorded. ");
+                        }
+                    }
+
+                    if (directoryOption == "4")
+                    {
+                        Console.WriteLine("What is the name of the song you would like to add to an album");
+                        var searchSong = PromptForString("> : ");
+
+                        var existingSong = context.Songs.FirstOrDefault(Songs => Songs.Title == searchSong);
+
+                        if (existingSong != null)
+                        {
+                            Console.WriteLine($"The song {existingSong} is already in the records.\nTry again. ");
+                        }
+                        else
+                        {
+                            Console.WriteLine("What is the name of the album that this song is located in?");
+                            var searchAlbum = PromptForString("> : ");
+
+                            var existingAlbums = context.Album.FirstOrDefault(searchAlbums => searchAlbums.Title == searchAlbums);
+
+                            if (existingAlbums == null)
+                            {
+                                Console.WriteLine($"\n {searchAlbum} does not exist in our record label. Try again.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Album; {searchAlbum} ");
+
+                                Console.WriteLine($"Song Title: {searchSong}");
+                                var songTitle = searchSong;
+
+                                Console.WriteLine("Track Number; ");
+                                var songTrackNumber = int.Parse(Console.ReadLine());
+
+                                var songDuration = PromptForString("Song duration - [00:00:00]");
+                                var newSong = new Songs
+                                {
+                                    TrackNumber = songTrackNumber,
+                                    Title = songTitle,
+                                    Duration = songDuration,
+                                };
+
+                                context.Songs.Add(newSong);
+                                context.SaveChanges();
+
+                                Console.WriteLine($"Your selection of {songTitle} has been collected.");
+
+
+                            }
                         }
                     }
                 }
