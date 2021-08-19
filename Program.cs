@@ -100,19 +100,19 @@ namespace RecordLabelDB
 
                 if (directoryOption == "1")
                 {
-                    var searchBand = PromptForString("What is the name of the band you would like to add?");
+                    var searchBands = PromptForString("What is the name of the band you would like to add?");
 
-                    var existingBand = context.Band.FirstOrDefault(Band => Band.Name == searchBand);
+                    var existingBand = context.Band.FirstOrDefault(Band => Band.Name == searchBands);
 
                     if (existingBand != null)
                     {
-                        Console.WriteLine($"{searchBand} already exists in our records as a Band.\n Please try another input");
+                        Console.WriteLine($"{searchBands} already exists in our records as a Band.\n Please try another input");
                     }
                     else
                     {
                         Console.WriteLine("Name of the band: ");
-                        Console.WriteLine($"{searchBand}");
-                        var bandName = searchBand;
+                        Console.WriteLine($"{searchBands}");
+                        var bandName = searchBands;
 
                         var countryOfOrigin = PromptForString("\n What country did this band originate in?\n");
 
@@ -148,6 +148,43 @@ namespace RecordLabelDB
                     }
 
 
+                }
+
+                if (directoryOption == "2")
+                {
+                    foreach (var band in context.Band)
+                    {
+                        Console.WriteLine($"There is a band called {band.Name} in our records.");
+                    }
+                }
+
+                if (directoryOption == "3")
+                {
+                    Console.WriteLine("What is the title of the album you would like to add?");
+                    var searchAlbums = PromptForString("> : ");
+
+                    var existingAlbum = context.Album.FirstOrDefault(Albums => Albums.Title == searchAlbums);
+
+                    if (existingAlbum != null)
+                    {
+                        Console.WriteLine($"{searchAlbums} is already in the record label as an Album.\nPossibly choose a different album name. ");
+                    }
+
+                    else
+                    {
+                        var searchBands = PromptForString("What band made the album you are referring? ");
+                        var existingBand = context.Band.FirstOrDefault(Band => Band.Name == searchBands);
+
+                        if (existingBand == null)
+                        {
+                            Console.WriteLine($"{searchBands} does not exist in the record label. Please add the band you are mentioning first.");
+                        }
+
+                        else
+                        {
+                            Console.WriteLine($"Band: {searchBands}");
+                        }
+                    }
                 }
             }
 
