@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace RecordLabelDB
@@ -40,35 +41,43 @@ namespace RecordLabelDB
         }
         static int PromptForInteger(string prompt)
         {
-            Console.Write(prompt);
-            int userInput;
-            var IsThisGoodInput = int.TryParse(Console.ReadLine(), out userInput);
-            if (IsThisGoodInput)
+            var isThisGoodInput = false;
+            do
             {
-                return userInput;
-            }
-            else
-            {
-                Console.WriteLine("Sorry there is no options under this input, ill use 0 as your number. ");
-                return 0;
-            }
+                var stringInput = PromptForString(prompt);
+
+                int numberInput;
+                isThisGoodInput = Int32.TryParse(stringInput, out numberInput);
+
+                if (isThisGoodInput)
+                {
+                    return numberInput;
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, this option does not exist, try again.");
+                }
+            } while (!isThisGoodInput);
+
+            return 0;
 
         }
-        static bool PromptForBoolean(string prompt)
+        static bool getBoolInputValue(string IsSigned)
         {
-            Console.Write(prompt);
-            bool userInput;
-            var IsThisGoodInput = bool.TryParse(Console.ReadLine(), out userInput);
-            if (IsThisGoodInput)
+            var IsSignedToLower = IsSigned.ToLower();
+
+            if (IsSigned.Equals("y", StringComparison.OrdinalIgnoreCase))
             {
-                return userInput;
+                return true;
+            }
+            else if (IsSigned.Equals("n", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
             }
             else
             {
-                Console.WriteLine("Sorry there is no options under this input, Im going to choose false as your choice");
                 return false;
             }
-
         }
         static string PromptForString(string prompt)
         {
@@ -87,44 +96,62 @@ namespace RecordLabelDB
             while (keepGoing)
             {
                 Directory();
-                var choice = Console.ReadLine();
-                switch (choice)
+                var directoryOption = PromptForString("> : ");
+
+                if (directoryOption == "1")
                 {
-                    case "1":
+                    var searchBand = PromptForString("What is the name of the band you would like to add?");
+
+                    var existingBand = context.Band.FirstOrDefault(Band => Band.Name == searchBand);
+
+                    if (existingBand != null)
+                    {
+                        Console.WriteLine($"{searchBand} already exists in our records as a Band.\n Please try another input");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Name of the band: ");
+                        Console.WriteLine($"{searchBand}");
+                        var bandName = searchBand;
+
+                        var countryOfOrigin = PromptForString("\n What country did this band originate in?\n");
+
+                        Console.WriteLine("Number of members in the band: ");
+                        var numberOfMembers = int.Parse(Console.ReadLine());
+
+                        var website = PromptForString("What is the bands website? \n");
+
+                        var style = PromptForString("What is the genre of music the band plays? \n ");
+
+                        Console.WriteLine("Is the band signed with the record label? True or False: \n ");
+                        var isSigned = getBoolInputValue(Console.ReadLine());
+
+                        var contactName = PromptForString("What is the name of the manager to contact: /n");
+
+                        var contactPhoneNumber = PromptForString("What is the number to contact the manager: ");
+
+                        var newBand = new Band
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("Adding a new band");
-                            Console.WriteLine();
+                            Name = bandName,
+                            CountryOfOrigin = countryOfOrigin,
+                            NumberOfMembers = numberOfMembers,
+                            Website = website,
+                            Style = style,
+                            IsSigned = isSigned,
+                            ContactName = contactName,
+                            ContactPhoneNumber = contactPhoneNumber,
+                        };
 
-                            var newBand = new Band();
+                        context.Band.Add(newBand);
+                        context.SaveChanges();
+                        Console.WriteLine($"Your selection of {bandName} has been saved. ");
+                    }
 
-                            newBand.Name = PromptForString(" What is the name of the new band you'd like to add? ");
-                            newBand.CountryOfOrigin = PromptForString(" What country did the band originate in? ");
-                            newBand.NumberOfMembers = PromptForInteger(" How many members are in the new band being created? ");
-                            newBand.Website = PromptForString(" What is the website that the band uses for their music? ");
-                            newBand.Style = PromptForString(" What style/genre does the band focus their music on? ");
-                            newBand.IsSigned = PromptForBoolean("Is this band signed? True/False ");
-                            newBand.ContactName = PromptForString("What is the contact name/managers name of the band? ");
-                            newBand.ContactPhoneNumber = PromptForString("What is the contact phone number of that manager? ");
 
-                            context.Band.Add(newBand);
-                            context.SaveChanges(); ccc
-                            break;
-                        }
-                    case "2":
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Viewing all of the bands in the directory");
-                            Console.WriteLine();
-
-                            var bandName = context.Band.Include(Band => Band.Album);
-                            foreach (var band in bandName)
-                            {
-                                Console.WriteLine($"There is a band call {band.Name}");
-                            }
-                        }
                 }
             }
-        }
 
+        }
     }
+
+}
