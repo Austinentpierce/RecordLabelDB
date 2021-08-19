@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace RecordLabelDB
 {
-    public class RecordLabelDBContext : DbContext
+    class RecordLabelDBContext : DbContext
     {
         public Dbset<Band> Band { get; set; }
         public Dbset<Album> Album { get; set; }
@@ -14,8 +14,8 @@ namespace RecordLabelDB
         {
             optionsBuilder.UseNpgsql("server=localhost;database=RecordLabelDB");
 
-            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-            optionsBuilder.UseLoggerFactory(loggerFactory);
+            //var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     }
 }
