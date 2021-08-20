@@ -277,6 +277,32 @@ namespace RecordLabelDB
                         var searchBands = PromptForString("Which band would you like to bring back to the label?");
 
                         var existingBand = context.Band.FirstOrDefault(Bands => Bands.Name == searchBands);
+
+                        if (existingBand == null)
+                        {
+                            Console.WriteLine($"\n {searchBands} is not in our collection. \n Please try again.");
+                        }
+
+                        else
+                        {
+                            existingBand.IsSigned = true;
+                            context.SaveChanges();
+                            Console.WriteLine($"\n {searchBands} has been moved to the 'Re-signed' department.");
+                        }
+                    }
+                    if (directoryOption == "7")
+                    {
+                        var bandAlbum = PromptForString("Which bands discography would you like to take a look at?");
+                        bandAlbum = context.Album.Include(albums => albums.Id).ThenInclude(context.bands => Bands.Name == searchBands);
+
+                        foreach (var album in context.Album)
+                        {
+                            Console.WriteLine($"\n This albums name is {album.Title} in our records for the band {Bands.Name}. ");
+                        }
+                    }
+                    if (directoryOption == "8")
+                    {
+                        var
                     }
                 }
             }
